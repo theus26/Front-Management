@@ -1,0 +1,86 @@
+<div class="max-w-lg mx-auto p-4">
+  <form (ngSubmit)="onSubmit(cadastroForm)" #cadastroForm="ngForm" class="space-y-6">
+    <h1 class="text-2xl font-bold mb-4 text-center">
+      {{ isEditMode ? 'Editar Funcionário' : 'Cadastrar Funcionário' }}
+    </h1>
+
+    <div>
+      <label for="nome" class="block text-sm font-medium text-gray-700">Nome</label>
+      <input
+        id="nome"
+        name="nome"
+        type="text"
+        [(ngModel)]="employee.name"
+        required
+        class="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+    </div>
+
+    <div>
+      <label for="cargo" class="block text-sm font-medium text-gray-700">Cargo</label>
+      <input
+        id="cargo"
+        name="cargo"
+        type="text"
+        [(ngModel)]="employee.position"
+        required
+        class="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+    </div>
+
+    <div>
+      <label for="dataAdmissao" class="block text-sm font-medium text-gray-700">Data de Admissão</label>
+      <input
+        id="dataAdmissao"
+        name="dataAdmissao"
+        type="date"
+        [(ngModel)]="employee.Date"
+        required
+        class="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+    </div>
+
+    <div>
+      <label for="salario" class="block text-sm font-medium text-gray-700">Salário</label>
+      <input
+        id="salario"
+        name="salario"
+        type="number"
+        [(ngModel)]="employee.salario"
+        required
+        step="0.01"
+        class="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+    </div>
+
+    <div>
+      <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+      <select
+        id="status"
+        name="status"
+        [(ngModel)]="employee.status"
+        required
+        class="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        <option value="ativo">Ativo</option>
+        <option value="inativo">Inativo</option>
+      </select>
+    </div>
+
+    <div class="flex justify-between">
+      <button
+        (click)="back()"
+        class="px-6 py-2 bg-blue-500 text-white font-medium rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        Voltar
+      </button>
+      <button
+        type="submit"
+        [disabled]="!cadastroForm.valid"
+        class="px-6 py-2 bg-blue-500 text-white font-medium rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        {{ isEditMode ? 'Atualizar' : 'Cadastrar' }}
+      </button>
+    </div>
+  </form>
+</div>

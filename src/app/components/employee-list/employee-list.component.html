@@ -1,0 +1,54 @@
+<div class="p-8">
+  <div class="mb-6 text-right">
+    <button
+      (click)="registerEmployee()"
+      class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600">
+      Cadastrar Novo Funcionário
+    </button>
+  </div>
+
+  <h1 class="text-2xl font-bold mb-4 text-center">Lista de Funcionários</h1>
+  <table class="min-w-full bg-white shadow-md rounded-lg">
+    <thead>
+      <tr>
+        <th class="py-2 px-4 text-left">Nome</th>
+        <th class="py-2 px-4 text-left">Cargo</th>
+        <th class="py-2 px-4 text-left">Data de Admissão</th>
+        <th class="py-2 px-4 text-left">Salário</th>
+        <th class="py-2 px-4 text-left">Status</th>
+        <th class="py-2 px-4 text-left">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees" class="border-b">
+        <td class="py-2 px-4">{{ employee.name }}</td>
+        <td class="py-2 px-4">{{ employee.position }}</td>
+        <td class="py-2 px-4">{{ employee.Date }}</td>
+        <td class="py-2 px-4">{{ employee.salario }}</td>
+        <td class="py-2 px-4">{{ employee.status }}</td>
+        <td class="py-2 px-4 flex justify-center gap-4">
+          <button
+            (click)="viewDetails(employee.id)"
+            class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600 flex items-center">
+            <i class="fas fa-eye mr-2"></i>
+            Ver Detalhes
+          </button>
+
+          <button
+            (click)="editUser(employee)"
+            class="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600 flex items-center">
+            <i class="fas fa-edit mr-2"></i>
+            Editar Usuário
+          </button>
+
+          <button
+            (click)="deleteUser(employee.id)"
+            class="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600 flex items-center">
+            <i class="fas fa-trash mr-2"></i>
+            Apagar Usuário
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
