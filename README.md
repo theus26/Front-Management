@@ -1,27 +1,29 @@
-# Management
+# Sistema de Gestão de Pessoal - Departamento de RH
+## Descrição do Projeto
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.11.
+Este projeto é uma aplicação web desenvolvida para o Departamento de Recursos Humanos (RH) com o objetivo de gerenciar informações de funcionários e permitir operações básicas como cadastro, visualização, edição e exclusão de dados. A aplicação também oferece funcionalidades como controle de férias, cálculo de salário médio, histórico de alterações de dados e geração de relatório
 
-## Development server
+## Tecnologias Utilizadas
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+* Angular, TailwindCSS
 
-## Code scaffolding
+## Como Executar o Projeto
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Clone o repositório:
 
-## Build
+```
+git clone <url-do-repositorio>
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+2. Instale as dependências:
 
-## Running unit tests
+```
+npm install
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+3. Execute o projeto:
 
-## Running end-to-end tests
+```
+ng serve
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
