@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { EmployeeService } from '../../services/employee.service';
 import { CommonModule } from '@angular/common';
 
+
 @Component({
   selector: 'app-employee-list',
   standalone: true,
@@ -21,18 +22,22 @@ export class EmployeeListComponent implements OnInit {
   viewDetails(id: number) {
     this.router.navigate(['/employee', id]);
   }
+  registerHoliday(id: number) {
+    this.router.navigate(['/registerHoliday/user', id]);
+  }
   registerEmployee() {
     this.router.navigate(['/register']);
   }
   editUser(employ: any) {
     this.router.navigate(['/edit',employ.id]);
   }
-
   deleteUser(id: number) {
     if (confirm('Tem certeza que deseja excluir este funcionário?')) {
       this.employeeService.deleteEmployee(id);
       this.employees = this.employeeService.getEmployees();
       alert('Funcionário deletado com sucesso!');
     }
+    }
+
+
   }
-}
