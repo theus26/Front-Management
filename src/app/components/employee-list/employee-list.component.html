@@ -24,9 +24,9 @@
         <tr *ngFor="let employee of employees" class="border-b">
           <td class="py-2 px-4 text-sm">{{ employee.name }}</td>
           <td class="py-2 px-4 text-sm">{{ employee.position }}</td>
-          <td class="py-2 px-4 text-sm">{{ employee.Date }}</td>
-          <td class="py-2 px-4 text-sm">{{ employee.salario | currency }}</td>
-          <td class="py-2 px-4 text-sm">{{ employee.status }}</td>
+          <td class="py-2 px-4 text-sm">{{  employee.admissionDate | date: 'dd/MM/yyyy' }}</td>
+          <td class="py-2 px-4 text-sm">{{ employee.wage| currency }}</td>
+          <td class="py-2 px-4 text-sm">{{ employee.isActive == true ? "Ativo" : "Desativado" }}</td>
           <td class="py-2 px-4 flex gap-4">
             <button
             (click)="viewDetails(employee.id)"

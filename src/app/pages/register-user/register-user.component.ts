@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from '../../services/employee.service';
 import { NgForm } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { CreateEmployee } from '../../interfaces/management';
 
 @Component({
   selector: 'app-register-user',
@@ -15,10 +16,17 @@ export class RegisterUserComponent implements OnInit {
   employee: any = {
     id: null,
     name: '',
-    cargo: '',
-    Date: '',
-    salario: null,
-    status: 'ativo'
+    position: '',
+    admissionDate: '',
+    wage: null,
+    isActive: true,
+  };
+  createEmployee: CreateEmployee = {
+    name: '',
+    position: '',
+    admissionDate: '',
+    wage: 0,
+    isActive: true,
   };
   isEditMode: boolean = false;
 
@@ -32,13 +40,13 @@ export class RegisterUserComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.isEditMode = true;
-      const newId = Number(id);
-      this.loadEmployee(newId);
+      this.loadEmployee(id);
     }
   }
 
-  loadEmployee(id: number) {
+  loadEmployee(id: string) {
     const employee = this.employeeService.getEmployeeById(id);
+    console.log(employee);
     if (employee) {
       this.employee = employee;
     }
@@ -48,9 +56,17 @@ export class RegisterUserComponent implements OnInit {
     if (this.isEditMode) {
       this.employeeService.updateEmployee(this.employee);
     } else {
-      this.employeeService.addEmployee(this.employee);
+      const formValues = cadastroForm.value;
+      formValues.isActive = formValues.isActive === "ativo";
+      this.createEmployee = {
+        ...formValues,
+        admissionDate: new Date(formValues.admissionDate).toISOString()
+      };
+
+      this.employeeService.addEmployee(this.createEmployee)
+        .then(() => this.router.navigate(['/']))
+        .catch(() => alert('Error registering user'));
     }
-    this.router.navigate(['/']);
   }
 
   back() {

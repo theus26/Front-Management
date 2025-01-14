@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { EmployeeService } from '../../services/employee.service';
 import { CommonModule } from '@angular/common';
+import { Employees } from '../../interfaces/management';
 
 
 @Component({
@@ -12,32 +13,43 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./employee-list.component.css']
 })
 export class EmployeeListComponent implements OnInit {
-  employees: any[] = [];
+  employees: Employees[] = [];
 
-  constructor(private employeeService: EmployeeService, private router: Router) {}
+  constructor(
+    private employeeService: EmployeeService,
+    private router: Router
+  ) {}
 
-  ngOnInit() {
-    this.employees = this.employeeService.getEmployees();
+  async ngOnInit(): Promise<void> {
+    this.loadEmployees();
   }
-  viewDetails(id: number) {
+
+  private async loadEmployees(): Promise<void> {
+    this.employees = await this.employeeService.getEmployees();
+  }
+
+  viewDetails(id: string): void {
     this.router.navigate(['/employee', id]);
   }
-  registerHoliday(id: number) {
+
+  registerHoliday(id: string): void {
     this.router.navigate(['/registerHoliday/user', id]);
   }
-  registerEmployee() {
+
+  registerEmployee(): void {
     this.router.navigate(['/register']);
   }
-  editUser(employ: any) {
-    this.router.navigate(['/edit',employ.id]);
+
+  editUser(employee: Employees): void {
+    this.router.navigate(['/edit', employee.id]);
   }
-  deleteUser(id: number) {
-    if (confirm('Tem certeza que deseja excluir este funcionário?')) {
-      this.employeeService.deleteEmployee(id);
-      this.employees = this.employeeService.getEmployees();
+
+  async deleteUser(id: string): Promise<void> {
+    const confirmed = confirm('Tem certeza que deseja excluir este funcionário?');
+    if (confirmed) {
+      await this.employeeService.deleteEmployee(id);
+      await this.loadEmployees();
       alert('Funcionário deletado com sucesso!');
     }
-    }
-
-
   }
+}

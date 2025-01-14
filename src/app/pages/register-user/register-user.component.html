@@ -5,10 +5,10 @@
     </h1>
 
     <div>
-      <label for="nome" class="block text-sm font-medium text-gray-700">Nome</label>
+      <label for="name" class="block text-sm font-medium text-gray-700">Nome</label>
       <input
-        id="nome"
-        name="nome"
+        id="name"
+        name="name"
         type="text"
         [(ngModel)]="employee.name"
         required
@@ -17,10 +17,10 @@
     </div>
 
     <div>
-      <label for="cargo" class="block text-sm font-medium text-gray-700">Cargo</label>
+      <label for="position" class="block text-sm font-medium text-gray-700">Cargo</label>
       <input
-        id="cargo"
-        name="cargo"
+        id="position"
+        name="position"
         type="text"
         [(ngModel)]="employee.position"
         required
@@ -29,24 +29,24 @@
     </div>
 
     <div>
-      <label for="dataAdmissao" class="block text-sm font-medium text-gray-700">Data de Admissão</label>
+      <label for="admissionDate" class="block text-sm font-medium text-gray-700">Data de Admissão</label>
       <input
-        id="dataAdmissao"
-        name="dataAdmissao"
+        id="admissionDate"
+        name="admissionDate"
         type="date"
-        [(ngModel)]="employee.Date"
+        [(ngModel)]="employee.admissionDate"
         required
         class="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
     </div>
 
     <div>
-      <label for="salario" class="block text-sm font-medium text-gray-700">Salário</label>
+      <label for="wage" class="block text-sm font-medium text-gray-700">Salário</label>
       <input
-        id="salario"
-        name="salario"
+        id="wage"
+        name="wage"
         type="number"
-        [(ngModel)]="employee.salario"
+        [(ngModel)]="employee.wage"
         required
         step="0.01"
         class="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -54,11 +54,11 @@
     </div>
 
     <div>
-      <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+      <label for="isActive" class="block text-sm font-medium text-gray-700">Status</label>
       <select
-        id="status"
-        name="status"
-        [(ngModel)]="employee.status"
+        id="isActive"
+        name="isActive"
+        [(ngModel)]="employee.isActive"
         required
         class="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
       >

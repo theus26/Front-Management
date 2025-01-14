@@ -1,24 +1,25 @@
 import { Injectable } from '@angular/core';
-
+import api from './api/api';
+import { Employees, CreateEmployee, UpdateEmployee, VacationRecord } from '../interfaces/management';
 @Injectable({
   providedIn: 'root',
 })
 export class EmployeeService {
-  private employees = [
-    { id: 1, name: 'João', position: 'Desenvolvedor', Date: '2022-01-01', salario: 3000, status: 'ativo' },
-    { id: 2, name: 'Maria', position: 'Desenvolvedor', Date: '2022-01-01', salario: 3000, status: 'ativo' },];
+  private employees: Employees[] = [];
 
-  getEmployees() {
-    return this.employees.filter((employee) => employee.status === 'ativo');
+  async getEmployees(): Promise<Employees[]> {
+    const response = await api.get('/Employees/GetAllEmployees');
+    this.employees = response.data;
+    return this.employees;
   }
 
-  getEmployeeById(id: number) {
+  getEmployeeById(id: string | null) {
     return this.employees.find((employee) => employee.id === id);
   }
 
-  addEmployee(employee: any) {
-    const newId = (this.employees.length + 1).toString();
-    this.employees.push({ ...employee, id: newId });
+  async addEmployee(employee: CreateEmployee) {
+    const response = await api.post('/Employees/CreateEmployee', employee);
+    return response.data;
   }
 
   updateEmployee(updatedEmployee: any) {
@@ -28,7 +29,7 @@ export class EmployeeService {
     }
   }
 
-  deleteEmployee(id: number): void {
-    this.employees = this.employees.filter(employee => employee.id !== id);
+  async deleteEmployee(employeeId: string): Promise<void> {
+     await api.delete('/Employees/DeleteEmployee', { params: { employeeId}});
   }
 }
