@@ -27,3 +27,4 @@ npm install
 ng serve
 ```
 
+4. Acesse em: http://localhost:4200
