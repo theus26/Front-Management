@@ -14,6 +14,8 @@ import { Employees } from '../../interfaces/management';
 })
 export class EmployeeListComponent implements OnInit {
   employees: Employees[] = [];
+  averageSalary = 0;
+  showAverageModal = false;
 
   constructor(
     private employeeService: EmployeeService,
@@ -28,12 +30,12 @@ export class EmployeeListComponent implements OnInit {
     this.employees = await this.employeeService.getEmployees();
   }
 
-  viewDetails(id: string): void {
-    this.router.navigate(['/employee', id]);
+  viewDetails(employeeId: string): void {
+    this.router.navigate(['/employee', employeeId]);
   }
 
-  registerHoliday(id: string): void {
-    this.router.navigate(['/registerHoliday/user', id]);
+  registerHoliday(employeeId: string): void {
+    this.router.navigate(['/registerHoliday/user', employeeId]);
   }
 
   registerEmployee(): void {
@@ -44,10 +46,19 @@ export class EmployeeListComponent implements OnInit {
     this.router.navigate(['/edit', employee.id]);
   }
 
-  async deleteUser(id: string): Promise<void> {
+  closeModal(): void {
+    this.showAverageModal = false;
+  }
+
+  async showAverageSalaryModal(): Promise<void> {
+    this.averageSalary = await this.employeeService.getAverageSalary();
+    this.showAverageModal = true;
+  }
+
+  async deleteUser(employeeId: string): Promise<void> {
     const confirmed = confirm('Tem certeza que deseja excluir este funcionário?');
     if (confirmed) {
-      await this.employeeService.deleteEmployee(id);
+      await this.employeeService.deleteEmployee(employeeId);
       await this.loadEmployees();
       alert('Funcionário deletado com sucesso!');
     }

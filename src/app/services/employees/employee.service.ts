@@ -35,6 +35,11 @@ export class EmployeeService {
     return response.data;
   }
 
+  async getAverageSalary(): Promise<number> {
+    const response = await api.get('/Employees/GetAverageSalary');
+    return response.data;
+  }
+
   async deleteEmployee(employeeId: string): Promise<void> {
      await api.delete('/Employees/DeleteEmployee', { params: { employeeId}});
   }
