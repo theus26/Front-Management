@@ -23,8 +23,6 @@ export class EmployeeDetailsComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     const id = this.route.snapshot.paramMap.get('id');
     this.employee = await this.employeeService.getEmployeeById(id);
-    console.log(this.employee);
-
   }
   generateReport() {
     const doc = new jsPDF();

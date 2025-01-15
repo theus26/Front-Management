@@ -48,7 +48,6 @@ export class RegisterUserComponent implements OnInit {
 
   async loadEmployee(id: string) {
     const employee = await this.employeeService.getEmployeeById(id);
-    console.log(employee);
     if (employee) {
       this.employee = employee;
     }
@@ -75,8 +74,8 @@ export class RegisterUserComponent implements OnInit {
     try {
       await this.employeeService.updateEmployee(this.employee.id, this.employee);
       this.router.navigate(['/']);
-    } catch {
-      alert('Error updating user');
+    } catch (error: any) {
+      alert(error.response.data.error);
     }
   }
 
@@ -85,8 +84,8 @@ export class RegisterUserComponent implements OnInit {
     try {
       await this.employeeService.addEmployee(this.createEmployee);
       this.router.navigate(['/']);
-    } catch {
-      alert('Error registering user');
+    } catch (error: any) {
+      alert(error.response.data.error);
     }
   }
 

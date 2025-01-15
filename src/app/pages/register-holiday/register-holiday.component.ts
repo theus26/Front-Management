@@ -94,7 +94,6 @@ export class RegisterHolidayComponent implements OnInit {
         alert('Registro de férias salvo com sucesso');
         this.router.navigate(['/']);
       } catch (error: any) {
-        console.log(error.response.data.error);
         alert(error.response.data.error);
       }
     }
