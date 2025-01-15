@@ -1,25 +1,27 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EmployeeService } from '../../services/employee.service';
+import { EmployeeService } from '../../services/employees/employee.service';
 import { NgForm } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { CreateEmployee } from '../../interfaces/management';
+import { CreateEmployee, Employees } from '../../interfaces/management';
 
 @Component({
   selector: 'app-register-user',
   templateUrl: './register-user.component.html',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   styleUrls: ['./register-user.component.css']
 })
 export class RegisterUserComponent implements OnInit {
-  employee: any = {
-    id: null,
+  employee: Employees = {
+    id: '',
     name: '',
     position: '',
     admissionDate: '',
-    wage: null,
+    wage: 0,
     isActive: true,
+    vacationRecords: [],
   };
   createEmployee: CreateEmployee = {
     name: '',
@@ -44,28 +46,47 @@ export class RegisterUserComponent implements OnInit {
     }
   }
 
-  loadEmployee(id: string) {
-    const employee = this.employeeService.getEmployeeById(id);
+  async loadEmployee(id: string) {
+    const employee = await this.employeeService.getEmployeeById(id);
     console.log(employee);
     if (employee) {
       this.employee = employee;
     }
   }
 
-  onSubmit(cadastroForm: NgForm) {
+  async onSubmit(registerForm: NgForm) {
+    const formValues = this.mapFormValues(registerForm.value);
     if (this.isEditMode) {
-      this.employeeService.updateEmployee(this.employee);
+      await this.updateEmployee(formValues);
     } else {
-      const formValues = cadastroForm.value;
-      formValues.isActive = formValues.isActive === "ativo";
-      this.createEmployee = {
-        ...formValues,
-        admissionDate: new Date(formValues.admissionDate).toISOString()
-      };
+      await this.addEmployee(formValues);
+    }
+  }
 
-      this.employeeService.addEmployee(this.createEmployee)
-        .then(() => this.router.navigate(['/']))
-        .catch(() => alert('Error registering user'));
+  private mapFormValues(formValues: any): any {
+    return {
+      ...formValues,
+      admissionDate: new Date(formValues.admissionDate).toISOString()
+    };
+  }
+
+  private async updateEmployee(formValues: any) {
+    this.employee = { ...formValues, id: this.employee.id };
+    try {
+      await this.employeeService.updateEmployee(this.employee.id, this.employee);
+      this.router.navigate(['/']);
+    } catch {
+      alert('Error updating user');
+    }
+  }
+
+  private async addEmployee(formValues: any) {
+    this.createEmployee = { ...formValues };
+    try {
+      await this.employeeService.addEmployee(this.createEmployee);
+      this.router.navigate(['/']);
+    } catch {
+      alert('Error registering user');
     }
   }
 

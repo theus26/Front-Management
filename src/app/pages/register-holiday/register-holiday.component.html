@@ -1,13 +1,13 @@
 <div class="max-w-lg mx-auto p-4">
-  <form (ngSubmit)="onSubmit()" #cadastroForm="ngForm" class="space-y-6">
+  <form *ngIf="!statusMessage" (ngSubmit)="onSubmit(cadastroForm)" #cadastroForm="ngForm" class="space-y-6">
     <h1 class="text-2xl font-bold mb-4 text-center">
       Registro de férias
     </h1>
     <div>
-      <label for="dataAdmissao" class="block text-sm font-medium text-gray-700">Inicio das férias</label>
+      <label for="vacationStartDate" class="block text-sm font-medium text-gray-700">Inicio das férias</label>
       <input
-        id="dataAdmissao"
-        name="dataAdmissao"
+        id="vacationStartDate"
+        name="vacationStartDate"
         type="date"
         ngModel
         required
@@ -16,10 +16,10 @@
     </div>
 
     <div>
-      <label for="dataAdmissao" class="block text-sm font-medium text-gray-700">Fim das férias</label>
+      <label for="vacationeEndDate" class="block text-sm font-medium text-gray-700">Fim das férias</label>
       <input
-        id="dataAdmissao"
-        name="dataAdmissao"
+        id="vacationeEndDate"
+        name="vacationeEndDate"
         type="date"
         ngModel
         required
@@ -28,25 +28,28 @@
     </div>
 
     <div>
-      <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+      <label for="vacationStatus" class="block text-sm font-medium text-gray-700">Status</label>
       <select
-        id="status"
-        name="status"
+        id="vacationStatus"
+        name="vacationStatus"
         ngModel
         required
         class="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
-        <option value="ativo">Pendente</option>
-        <option value="inativo">Em andamento</option>
-        <option value="inativo">Concluído</option>
+        <option value="Pending">Pendente</option>
+        <option value="InProgress">Em andamento</option>
+        <option value="Completed">Concluído</option>
       </select>
     </div>
+
+
 
     <div class="flex justify-between">
       <button
         (click)="back()"
         class="px-6 py-2 bg-blue-500 text-white font-medium rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
+      <i class="fas fa-arrow-left mr-2"></i>
         Voltar
       </button>
       <button
@@ -54,8 +57,23 @@
         [disabled]="!cadastroForm.valid"
         class="px-6 py-2 bg-blue-500 text-white font-medium rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
+      <i class="fas fa-save mr-2"></i>
         Cadastrar
       </button>
     </div>
   </form>
+
+  <div *ngIf="statusMessage" class="bg-yellow-100 text-yellow-800 p-6 rounded-lg shadow-lg text-center">
+    <h2 class="text-xl font-semibold">Status do Pedido de Férias</h2>
+    <p class="mt-4 text-lg">{{ statusMessage }}</p>
+    <div class="mt-6">
+      <button
+        (click)="back()"
+        class="px-6 py-2 bg-blue-500 text-white font-medium rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        <i class="fas fa-arrow-left mr-2"></i>
+        Voltar
+      </button>
+    </div>
+  </div>
 </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EmployeeService } from '../../services/employee.service';
+import { EmployeeService } from '../../services/employees/employee.service';
 import { CommonModule } from '@angular/common';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
@@ -20,9 +20,11 @@ export class EmployeeDetailsComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     const id = this.route.snapshot.paramMap.get('id');
-    this.employee = this.employeeService.getEmployeeById(id);
+    this.employee = await this.employeeService.getEmployeeById(id);
+    console.log(this.employee);
+
   }
   generateReport() {
     const doc = new jsPDF();
@@ -30,9 +32,9 @@ export class EmployeeDetailsComponent implements OnInit {
     const rows = [[
       this.employee.name,
       this.employee.position,
-      this.employee.Date,
-      this.employee.salario,
-      this.employee.status
+      this.employee.admissionDate.split('T')[0],
+      this.employee.wage,
+      this.employee.isActive
     ]];
 
     autoTable(doc, {

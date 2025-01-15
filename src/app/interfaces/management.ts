@@ -17,9 +17,10 @@ export interface CreateEmployee {
 }
 
 export interface VacationRecord {
-  vacationStartDate: string;
-  vacationEndDate: string;
+  vacationStartDate: Date;
+  vacationeEndDate: Date;
   vacationStatus: string;
+  employeesId: string;
 }
 
 export interface UpdateEmployee {

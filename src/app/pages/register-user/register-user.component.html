@@ -34,7 +34,8 @@
         id="admissionDate"
         name="admissionDate"
         type="date"
-        [(ngModel)]="employee.admissionDate"
+        [ngModel]="employee.admissionDate | date:'yyyy-MM-dd'"
+        (ngModelChange)="employee.admissionDate = $event"
         required
         class="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
@@ -62,8 +63,8 @@
         required
         class="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
-        <option value="ativo">Ativo</option>
-        <option value="inativo">Inativo</option>
+      <option [ngValue]="true">Ativo</option>
+      <option [ngValue]="false">Inativo</option>
       </select>
     </div>
 
@@ -72,6 +73,7 @@
         (click)="back()"
         class="px-6 py-2 bg-blue-500 text-white font-medium rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
+      <i class="fas fa-arrow-left mr-2"></i>
         Voltar
       </button>
       <button
@@ -79,7 +81,8 @@
         [disabled]="!cadastroForm.valid"
         class="px-6 py-2 bg-blue-500 text-white font-medium rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
-        {{ isEditMode ? 'Atualizar' : 'Cadastrar' }}
+      <i class="fas fa-save mr-2"></i>
+      {{ isEditMode ? 'Atualizar' : 'Cadastrar' }}
       </button>
     </div>
   </form>

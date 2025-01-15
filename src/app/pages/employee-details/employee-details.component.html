@@ -1,7 +1,13 @@
 <div class="p-8">
   <h1 class="text-2xl font-bold mb-6 text-center">Relatório de Funcionários</h1>
 
-  <div class="mb-6 text-right">
+  <div class="mb-6 flex justify-between text-right">
+    <button
+      (click)="goBack()"
+      title="Voltar"
+      class="bg-indigo-500 text-white px-6 py-2 rounded-lg hover:bg-indigo-600 transition-colors duration-300">
+      <i class="fas fa-arrow-left mr-2"></i> Voltar
+    </button>
     <button
       (click)="generateReport()"
       title="Gerar Relatório"
@@ -14,7 +20,6 @@
     <table class="min-w-full table-auto">
       <thead>
         <tr class="bg-gray-200">
-          <th class="py-2 px-4 text-left text-sm font-medium text-gray-700">ID</th>
           <th class="py-2 px-4 text-left text-sm font-medium text-gray-700">Nome</th>
           <th class="py-2 px-4 text-left text-sm font-medium text-gray-700">Cargo</th>
           <th class="py-2 px-4 text-left text-sm font-medium text-gray-700">Data de Admissão</th>
@@ -24,7 +29,6 @@
       </thead>
       <tbody>
         <tr class="border-b">
-          <td class="py-2 px-4 text-sm">{{ employee.id }}</td>
           <td class="py-2 px-4 text-sm">{{ employee.name }}</td>
           <td class="py-2 px-4 text-sm">{{ employee.position }}</td>
           <td class="py-2 px-4 text-sm">{{  employee.admissionDate | date: 'dd/MM/yyyy' }}</td>
