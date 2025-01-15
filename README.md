@@ -7,6 +7,12 @@ Este projeto é uma aplicação web desenvolvida como parte de um teste técnico
 
 * Angular, TailwindCSS
 
+## Pré-requisitos
+
+* Node.js instalado
+* Angular CLI instalado
+* API Backend em execução
+
 ## Como Executar o Projeto
 
 1. Clone o repositório:
@@ -24,7 +30,8 @@ npm install
 3. Execute o projeto:
 
 ```
-ng serve
+npm run start
 ```
-
-4. Acesse em: http://localhost:4200
+4. Certifique-se de que a API backend esteja em execução. Caso necessário, ajuste a URL base da API nos serviços Angular. Localize o arquivo de serviços responsável pelas requisições e atualize a URL conforme o ambiente desejado.
+   
+5. Acesse em: http://localhost:4200
