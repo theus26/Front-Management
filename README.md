@@ -18,7 +18,7 @@ Este projeto é uma aplicação web desenvolvida como parte de um teste técnico
 1. Clone o repositório:
 
 ```
-git clone <url-do-repositorio>
+git clone https://github.com/theus26/Front-Management.git
 ```
 
 2. Instale as dependências:
