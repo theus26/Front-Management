@@ -24,7 +24,9 @@ git clone <url-do-repositorio>
 2. Instale as dependências:
 
 ```
-npm install
+* npm i @angular/cli
+* npm install
+
 ```
 
 3. Execute o projeto:
